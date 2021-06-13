@@ -7,7 +7,7 @@ In very early development.  Currently only a basic Read_property class that will
 All the newer code is under BACnetProject folder.  As of now, all the rest is original code.
 
 <hr>
-<h3>The Original Readme.md file for Bacnet-Stack
+<h3>The Original Readme.md file for Bacnet-Stack</h3>
 
 BACnet open source protocol stack for embedded systems, Linux, and Windows
 http://bacnet.sourceforge.net/

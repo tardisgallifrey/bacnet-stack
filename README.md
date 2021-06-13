@@ -1,22 +1,22 @@
-# BACnet Stack 
+# BACnet Stack with stuff added
+
+This is a fork of BACnet Stack with added C# apps/classes that uses the bacnet mini-apps in order to create a useable BACnet application.
+
+In very early development.  Currently only a basic Read_property class that will allow easier calling for PV.  Hoping to use it as a base to build classes for read-AI, read-AO, etc.  Lots to do.
+
+All the newer code is under BACnetProject folder.  As of now, all the rest is original code.
+
+<hr>
+<h3>The Original Readme.md file for Bacnet-Stack
 
 BACnet open source protocol stack for embedded systems, Linux, and Windows
 http://bacnet.sourceforge.net/
 
 Welcome to the wonderful world of BACnet and true device interoperability!
 
-Continuous Integration
-----------------------
-
 This library uses various automated continuous integration services 
 to assist in automated compilation, validation, linting, and unit testing 
 of robust C code and BACnet functionality.
-
-[![Actions Status](https://github.com/bacnet-stack/bacnet-stack/workflows/CMake/badge.svg)](https://github.com/bacnet-stack/bacnet-stack/actions) GitHub Workflow
-
-[![Build Status](https://travis-ci.com/bacnet-stack/bacnet-stack.svg?branch=master)](https://travis-ci.com/bacnet-stack/bacnet-stack) Travis CI
-
-[![Build status](https://ci.appveyor.com/api/projects/status/5lq0d9a69g7ixskm/branch/master?svg=true)](https://ci.appveyor.com/project/skarg/bacnet-stack/branch/master) AppVeyor CI
 
 About this Project
 ------------------

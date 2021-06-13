@@ -10,6 +10,10 @@ namespace BACnetProject
         {
             Console.WriteLine("A BACnet Utility in C#");
 
+            var readall = new ReadAllObjects();
+
+            readall.Device = 8212.ToString();
+
             var readprop = new ReadProperty();
 
             while (true)
@@ -17,6 +21,7 @@ namespace BACnetProject
                 readprop.objectDevice = 8212.ToString();
                 readprop.objectNumber = 0.ToString();
                 readprop.objectInstance = 1.ToString();
+                readprop.objectProperty = 85.ToString();
                 Console.WriteLine(readprop.Output());
                 Thread.Sleep(5000);
             }

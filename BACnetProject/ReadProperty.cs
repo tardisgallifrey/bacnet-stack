@@ -8,7 +8,6 @@ using System.Text;
 
 namespace BACnetProject
 {
-
     public class ReadProperty
     {
 
@@ -16,7 +15,7 @@ namespace BACnetProject
         public string objectDevice { get; set; }
         public string objectNumber { get; set; }
         public string objectInstance { get; set; }
-        private string objectProperty = "85";
+        public string objectProperty { get; set; }
 
         //If  you are going to use System.Diagnostics.myprocess in a class, you must do it this way
         public string Output()
@@ -80,8 +79,6 @@ namespace BACnetProject
 
 
         }
-
-
 
     }
 }

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 
 
@@ -10,22 +12,19 @@ namespace BACnetProject
         {
             Console.WriteLine("A BACnet Utility in C#");
 
-            var readall = new ReadAllObjects();
+            ReadAI get_ai_value = new ReadAI("8212", "1");
 
-            readall.Device = 8212.ToString();
+            Console.WriteLine(get_ai_value.Output());
 
-            var readprop = new ReadProperty();
+            ReadAllObjects get_obj_list = new ReadAllObjects("8212");
 
-            while (true)
+            var result = get_obj_list.ListOutput();
+            foreach(var item in result)
             {
-                readprop.objectDevice = 8212.ToString();
-                readprop.objectNumber = 0.ToString();
-                readprop.objectInstance = 1.ToString();
-                readprop.objectProperty = 85.ToString();
-                Console.WriteLine(readprop.Output());
-                Thread.Sleep(5000);
+                Console.Write($"{item}, ");
             }
 
+            Console.WriteLine();
         }
     }
 

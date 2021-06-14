@@ -8,7 +8,7 @@ using System.Text;
 
 namespace BACnetProject
 {
-    public class ReadProperty
+    abstract public class ReadProperty
     {
 
         private string ToolFileName = "bacrp";

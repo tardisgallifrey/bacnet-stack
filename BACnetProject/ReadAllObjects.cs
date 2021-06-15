@@ -11,6 +11,7 @@ namespace BACnetProject
     {
         public ReadAllObjects(string device)
         {
+            //Does the same as in ReadAI, but different values
             const string device_property = "8";
             const string read_all = "76";
 
@@ -21,6 +22,9 @@ namespace BACnetProject
 
         }
 
+            //Base class only returns a string
+            //We implement a new method that returns an array
+            //Will return later to have it returna Tuple or hashed Tuple
         public List<string> ListOutput()
             {
                 List<string> results = new List<string>();
@@ -32,7 +36,7 @@ namespace BACnetProject
                     TextThings filter = new TextThings();
 
                     var output = filter.FilterString(str);
-                    //Console.Write(output);
+                    
                     results.Add(output);
 
                 }

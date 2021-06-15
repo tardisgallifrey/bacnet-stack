@@ -1,53 +1,36 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Text;
-
-//Modifed from Code provided by StackOverflow and Microsoft
-//https://stackoverflow.com/questions/206323/how-to-execute-command-line-in-c-get-std-out-results
-//https://docs.microsoft.com/en-us/dotnet/api/system.diagnostics.process?view=net-5.0
+using System.Collections.Generic;
+using System.Linq;
 
 namespace BACnetProject
 {
-    abstract public class ReadProperty
+    public class Discover
     {
-        //This abstracted class is the base class for all the Read property (bacrp) needs
-        //With an abstract class, I can simplify calls to just the data needed
-
-        //bacrp works like this:  bacrp device_address object_property_number object_instance object_property
-        //So, we establish a public string property for each of these, then use a 
-        //System Call and return the value for processing
-
-        private string ToolFileName = "bacrp";
-        public string objectDevice { get; set; }
-        public string objectNumber { get; set; }
-        public string objectInstance { get; set; }
-        public string objectProperty { get; set; }
+        private string ToolFileName = "bacwi";
+       
 
         //Output is the base method.  Goes and runs bacrp with the above values and gets the result
         //into a string
 
         //If  you are going to use System.Diagnostics.myprocess in a class, you must do it this way
-        public string Output()
+        public List<string> Output()
         {
             var stdOut = new StringBuilder();
 
             using (Process myprocess = new Process())
             {
                 //First we fill up all the data for a Process to run
-                //We also add in the properties from above as arguments
 
                 myprocess.StartInfo.FileName = ToolFileName;
-                myprocess.StartInfo.ArgumentList.Add(objectDevice);
-                myprocess.StartInfo.ArgumentList.Add(objectNumber);
-                myprocess.StartInfo.ArgumentList.Add(objectInstance);
-                myprocess.StartInfo.ArgumentList.Add(objectProperty);
                 myprocess.StartInfo.CreateNoWindow = true;
                 myprocess.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
                 myprocess.StartInfo.UseShellExecute = false;
                 myprocess.StartInfo.RedirectStandardError = true;
                 myprocess.StartInfo.RedirectStandardOutput = true;
                 //the returned string, stdOut is built according to this line
-                myprocess.OutputDataReceived += (sender, args) => stdOut.AppendLine(args.Data); 
+                myprocess.OutputDataReceived += (sender, args) => stdOut.AppendLine(args.Data);
                 // Use AppendLine rather than Append since args.Data is one line of output, not including the newline character.
 
                 string stdError = null;
@@ -68,8 +51,31 @@ namespace BACnetProject
 
                 if (myprocess.ExitCode == 0)
                 {
-                    //send back stdOut with our value string
-                    return stdOut.ToString();
+                    List<string> results = new List<string>();
+
+                    string str = stdOut.ToString();
+
+                    var object_List = str.Split(new[] { Environment.NewLine }, StringSplitOptions.None );
+
+                    foreach( string address_record in object_List)
+                    {
+                        try
+                        {
+                            int index = address_record.IndexOf (' ', 2, 8);
+                            string piece = address_record.Substring(2, index);
+                            if(Char.IsDigit(piece, 0))
+                            {
+                                results.Add(piece);
+                            }
+                        }
+                        catch (System.Exception)
+                        {
+                             break;
+                        }
+                        
+                    }
+
+                    return results.ToList();
                 }
                 else
                 {
@@ -87,14 +93,11 @@ namespace BACnetProject
                     }
 
                     throw new Exception(" finished with exit code = " + myprocess.ExitCode + ": " + message);
-                
+
                 }
 
 
             }
-
-
         }
-
     }
 }

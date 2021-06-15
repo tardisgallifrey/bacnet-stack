@@ -12,6 +12,8 @@ namespace BACnetProject
         {
             Console.WriteLine("A BACnet Utility in C#");
 
+            Discover whois = new Discover();
+
             ReadAI get_ai_value = new ReadAI("8212", "1");
 
             Console.WriteLine(get_ai_value.Output());
@@ -25,6 +27,12 @@ namespace BACnetProject
             }
 
             Console.WriteLine();
+
+            var result2 = whois.Output();
+            foreach(var item2 in result2)
+            {
+                Console.WriteLine((item2));
+            }
         }
     }
 

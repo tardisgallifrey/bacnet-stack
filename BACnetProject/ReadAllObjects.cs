@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -6,6 +7,13 @@ using System.Linq;
 namespace BACnetProject
 {
 
+    public struct Points
+    {
+        public int id;  
+        public string property_name;
+        public int property_number;
+        public int point_number;
+    }
    
     public class ReadAllObjects : ReadProperty
     {
